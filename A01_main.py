@@ -151,3 +151,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+#secure project
+import subprocess
+
+user_input = input("Enter command: ")
+subprocess.call(user_input, shell=True)
