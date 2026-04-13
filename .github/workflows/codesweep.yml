@@ -1,20 +1,30 @@
 name: "HCL AppScan CodeSweep"
+
 on:
   pull_request:
-    types: [opened,synchronize]
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+  statuses: write
+
 jobs:
   scan:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
       - name: Run AppScan CodeSweep
         uses: HCL-TECH-SOFTWARE/appscan-codesweep-action@v2
         with:
-          asoc_key: ${{secrets.ASOC_KEY}}
-          asoc_secret: ${{secrets.ASOC_SECRET}}
+          asoc_key: ${{ secrets.ASOC_KEY }}
+          asoc_secret: ${{ secrets.ASOC_SECRET }}
           status: failure
-    env: 
-      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
